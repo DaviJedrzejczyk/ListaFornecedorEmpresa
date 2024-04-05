@@ -4,6 +4,7 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ListDbContext))]
-    partial class ListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405183152_AdiçãoCamposNovos")]
+    partial class AdiçãoCamposNovos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,11 +65,6 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime?>("BirthDate")
-                        .IsUnicode(false)
-                        .HasColumnType("datetime2")
-                        .HasColumnName("BIRTH_DATE");
-
                     b.Property<string>("CNPJ")
                         .HasMaxLength(18)
                         .IsUnicode(false)
@@ -81,6 +79,11 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("DataNascimento")
+                        .IsUnicode(false)
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DATA_NASCIMENTO");
 
                     b.Property<DateTime>("InsertDate")
                         .IsUnicode(false)

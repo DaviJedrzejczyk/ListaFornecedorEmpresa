@@ -29,8 +29,12 @@ namespace BusinessLogicalLayer.Implements
                     response = await _unityOfWork.CompanyDAL.Insert(company);
                     if (response.HasSuccess)
                     {
-                        await _unityOfWork.Commit();
-                        return ResponseFactory.CreateInstance().CreateSuccessResponse(response.Message);
+                        response = await _unityOfWork.Commit();
+
+                        if (response.HasSuccess)
+                        {
+                            return ResponseFactory.CreateInstance().CreateSuccessResponse(response.Message);
+                        }
                     }
                 }
 
@@ -47,14 +51,17 @@ namespace BusinessLogicalLayer.Implements
             try
             {
 
-                Response response = new CompanyInsertValidator().Validate(company).ConvertToResponse();
+                Response response = new CompanyEditValidator().Validate(company).ConvertToResponse();
                 if (response.HasSuccess)
                 {
                     response = await _unityOfWork.CompanyDAL.Update(company);
                     if (response.HasSuccess)
                     {
-                        await _unityOfWork.Commit();
-                        return ResponseFactory.CreateInstance().CreateSuccessResponse(response.Message);
+                        response = await _unityOfWork.Commit();
+                        if (response.HasSuccess)
+                        {
+                            return ResponseFactory.CreateInstance().CreateSuccessResponse(response.Message);
+                        }
                     }
                 }
 

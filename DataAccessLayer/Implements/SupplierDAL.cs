@@ -32,14 +32,12 @@ namespace DataAccessLayer.Implements
         {
             try
             {
-                Supplier? existingSupplier = (await GetById(supplier.ID)).Item; ;
+                Supplier? existingSupplier = (await GetById(supplier.ID)).Item;
 
                 if (existingSupplier == null)
-                {
                     return ResponseFactory.CreateInstance().CreateFailureResponse("Fornecedor não encontrado!");
-                }
 
-                existingSupplier = supplier;
+                UpdateLines(supplier, existingSupplier);
 
                 return ResponseFactory.CreateInstance().CreateSuccessResponse("Edição efetuada com sucesso!");
             }
@@ -72,7 +70,7 @@ namespace DataAccessLayer.Implements
         {
             try
             {
-                List<Supplier> suppliers = await _db.Suppliers.ToListAsync();
+                List<Supplier> suppliers = await _db.Suppliers.Include(c => c.Company).AsNoTracking().ToListAsync();
                 return ResponseFactory.CreateInstance().CreateSuccessDataResponse(suppliers);
             }
             catch (Exception ex)
@@ -85,7 +83,7 @@ namespace DataAccessLayer.Implements
         {
             try
             {
-                Supplier? supplier = await _db.Suppliers.FirstOrDefaultAsync(x => x.ID == id);
+                Supplier? supplier = await _db.Suppliers.Include(c => c.Company).FirstOrDefaultAsync(x => x.ID == id);
 
                 if (supplier == null)
                     return ResponseFactory.CreateInstance().CreateFailureSingleResponse<Supplier>("Nenhum fornecedor encontrado!");
@@ -98,6 +96,17 @@ namespace DataAccessLayer.Implements
             }
         }
 
-       
+        private static void UpdateLines(Supplier supplier, Supplier existingSupplier)
+        {
+            existingSupplier.CNPJ = supplier.CNPJ;
+            existingSupplier.CPF = supplier.CPF;
+            existingSupplier.PhoneNumber = supplier.PhoneNumber;
+            existingSupplier.Name = supplier.Name;
+            existingSupplier.RG = supplier.RG;
+            existingSupplier.BirthDate = supplier.BirthDate;
+            existingSupplier.CompanyId = supplier.CompanyId;
+        }
+
+
     }
 }

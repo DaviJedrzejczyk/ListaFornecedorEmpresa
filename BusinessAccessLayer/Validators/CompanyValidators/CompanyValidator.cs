@@ -36,7 +36,7 @@ namespace BusinessLogicalLayer.Validators.CompanyValidators
 
         public void ValidateCnpj()
         {
-            RuleFor(c => c.CNPJ).NotNull().WithMessage(CompanyConstants.ERROR_MESSAGE_INVALID_CNPJ)
+            RuleFor(c => c.CNPJ).NotNull().WithMessage(CompanyConstants.ERROR_MESSAGE_EMPTY_CNPJ)
                                 .IsCnpjValid().WithMessage(CompanyConstants.ERROR_MESSAGE_INVALID_CNPJ);
         }
     }

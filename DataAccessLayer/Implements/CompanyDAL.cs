@@ -38,8 +38,7 @@ namespace DataAccessLayer.Implements
                 {
                     return ResponseFactory.CreateInstance().CreateFailureResponse("Empresa não encontrada!");
                 }
-
-                existingCompany = company;
+                UpdateLines(company, existingCompany);
 
                 return ResponseFactory.CreateInstance().CreateSuccessResponse("Edição efetuada com sucesso!");
             }
@@ -60,7 +59,7 @@ namespace DataAccessLayer.Implements
 
                 _db.Remove(company);
 
-                return ResponseFactory.CreateInstance().CreateSuccessResponse("Contato excluído com sucesso!");
+                return ResponseFactory.CreateInstance().CreateSuccessResponse("Empresa excluída com sucesso!");
             }
             catch (Exception ex)
             {
@@ -96,6 +95,13 @@ namespace DataAccessLayer.Implements
             {
                 return ResponseFactory.CreateInstance().CreateFailureSingleResponse<Company>(ex);
             }
+        }
+
+        private static void UpdateLines(Company company, Company existingCompany)
+        {
+            existingCompany.UF = company.UF;
+            existingCompany.CNPJ = company.CNPJ;
+            existingCompany.FantasyName = company.FantasyName;
         }
     }
 }

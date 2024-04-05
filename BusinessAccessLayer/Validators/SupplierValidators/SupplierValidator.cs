@@ -1,12 +1,14 @@
 ﻿using BusinessLogicalLayer.Constants.Supplier;
 using BusinessLogicalLayer.Validators.CommonsValidators;
 using Entities;
+using Entities.Enum;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusinessLogicalLayer.Validators.SupplierValidators
 {
@@ -24,22 +26,12 @@ namespace BusinessLogicalLayer.Validators.SupplierValidators
                               .MaximumLength(50).WithMessage(SupplierConstants.ERROR_MESSAGE_LARGE_NAME);
         }
 
-        public void ValidateCnpj()
-        {
-            RuleFor(s => s.CNPJ).NotNull().WithMessage(SupplierConstants.ERROR_MESSAGE_EMPTY_CNPJ)
-                                .IsCnpjValid().WithMessage(SupplierConstants.ERROR_MESSAGE_INVALID_CNPJ);
-        }
-
-        public void ValidateCpf()
-        {
-            RuleFor(s => s.CPF).NotNull().WithMessage(SupplierConstants.ERROR_MESSAGE_EMPTY_CPF)
-                               .IsCpfValid().WithMessage(SupplierConstants.ERROR_MESSAGE_INVALID_CPF);
-        }
-
         public void ValidatePhoneNumber()
         {
             RuleFor(s => s.PhoneNumber).NotNull().WithMessage(SupplierConstants.ERROR_MESSAGE_EMPTY_PHONE_NUMBER)
                                        .MaximumLength(11).WithMessage(SupplierConstants.ERROR_MESSAGE_INVALID_PHONE_NUMBER);
         }
+
+       
     }
 }

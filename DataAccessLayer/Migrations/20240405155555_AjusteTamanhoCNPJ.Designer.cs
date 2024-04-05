@@ -4,6 +4,7 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ListDbContext))]
-    partial class ListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405155555_AjusteTamanhoCNPJ")]
+    partial class AjusteTamanhoCNPJ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +47,11 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("FANTASY_NAME");
 
-                    b.Property<int>("UF")
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2)
                         .IsUnicode(false)
-                        .HasColumnType("int")
+                        .HasColumnType("varchar(2)")
                         .HasColumnName("UF");
 
                     b.HasKey("ID");
@@ -61,11 +66,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<DateTime?>("BirthDate")
-                        .IsUnicode(false)
-                        .HasColumnType("datetime2")
-                        .HasColumnName("BIRTH_DATE");
 
                     b.Property<string>("CNPJ")
                         .HasMaxLength(18)
@@ -100,12 +100,6 @@ namespace DataAccessLayer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(14)")
                         .HasColumnName("PHONE_NUMBER");
-
-                    b.Property<string>("RG")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("RG");
 
                     b.HasKey("ID");
 

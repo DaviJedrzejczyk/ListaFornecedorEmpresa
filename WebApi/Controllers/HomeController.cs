@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BusinessLogicalLayer.Interfaces;
+using Entities;
+using Microsoft.AspNetCore.Mvc;
+using Shared.Responses;
+using WebApi.Models.SupplierModels;
 
 namespace WebApi.Controllers
 {
@@ -6,10 +11,26 @@ namespace WebApi.Controllers
     [Route("/")]
     public class HomeController : Controller
     {
-        [HttpGet("Home")]
-        public IActionResult Index()
+        private readonly ISupplierService supplierService;
+        private readonly IMapper mapper;
+    
+        public HomeController(ISupplierService supplierService, IMapper mapper)
         {
-            return Ok();
+            this.supplierService = supplierService;
+            this.mapper = mapper;
+        }
+
+        [HttpGet("Home")]
+        public async Task<IActionResult> Index()
+        {
+            DataResponse<Supplier> response = await supplierService.GetAll();
+            if (response.HasSuccess)
+            {
+                List<SupplierListViewModel> model = mapper.Map<List<SupplierListViewModel>>(response.Items);
+                return Ok(model);
+            }
+
+            return BadRequest(response);
         }
     }
 }

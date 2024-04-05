@@ -16,9 +16,11 @@ namespace DataAccessLayer.Mappings
             builder.ToTable("SUPPLIERS");
             builder.Property(s => s.Name).HasMaxLength(50).IsUnicode(false).IsRequired().HasColumnName("NAME");
             builder.Property(s => s.PhoneNumber).HasMaxLength(14).IsUnicode(false).IsRequired().HasColumnName("PHONE_NUMBER");
-            builder.Property(s => s.CNPJ).HasMaxLength(11).IsUnicode(false).HasColumnName("CNPJ");
+            builder.Property(s => s.CNPJ).HasMaxLength(18).IsUnicode(false).HasColumnName("CNPJ");
             builder.Property(s => s.CPF).HasMaxLength(11).IsUnicode(false).HasColumnName("CPF");
             builder.Property(s => s.InsertDate).HasColumnType("datetime2").IsUnicode(false).IsRequired().HasColumnName("INSERT_DATE");
+            builder.Property(s => s.RG).HasMaxLength(10).IsUnicode(false).HasColumnName("RG");
+            builder.Property(s => s.BirthDate).HasColumnType("datetime2").IsUnicode(false).HasColumnName("BIRTH_DATE");
         }
     }
 }

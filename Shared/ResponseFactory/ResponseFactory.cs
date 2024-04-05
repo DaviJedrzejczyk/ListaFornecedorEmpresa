@@ -65,7 +65,7 @@ namespace Shared.ResponseFactory
         public SingleResponse<T> CreateFailureSingleResponse<T>(Exception ex) => new()
         {
             HasSuccess = false,
-            Message = ResponseConstants.FAILURE_MESSAGE,
+            Message = ex.Message,
             Exception = ex
         };
         public DataResponse<T> CreateSuccessDataResponse<T>(List<T> dados) => new()
@@ -87,7 +87,7 @@ namespace Shared.ResponseFactory
         public DataResponse<T> CreateFailureDataResponse<T>(Exception ex) => new()
         {
             HasSuccess = false,
-            Message = ResponseConstants.FAILURE_MESSAGE,
+            Message = ex.Message,
             Exception = ex
         };
     }

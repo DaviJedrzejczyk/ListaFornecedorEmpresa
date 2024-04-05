@@ -10,8 +10,6 @@ namespace BusinessLogicalLayer.Validators.SupplierValidators
     {
         public SupplierInsertValidator()
         {
-            base.ValidateCpf();
-            base.ValidateCnpj();
             base.ValidateID();
             base.ValidateName();
             base.ValidatePhoneNumber();
