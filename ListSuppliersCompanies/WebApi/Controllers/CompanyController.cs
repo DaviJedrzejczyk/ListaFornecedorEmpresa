@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BusinessLogicalLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
     public class CompanyController : Controller
     {
+        private readonly ICompanyService _companyService;
+        private readonly IMapper _mapper;
+
+
+        public CompanyController(ICompanyService svc, IMapper mapper)
+        {
+            this._mapper = mapper;
+            this._companyService = svc;
+        }
+
         [HttpGet("AllCompanys")]
         public IActionResult Index()
         {
+
             return Ok();
         }
 

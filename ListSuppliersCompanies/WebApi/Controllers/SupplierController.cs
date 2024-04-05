@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BusinessLogicalLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
@@ -6,6 +8,16 @@ namespace WebApi.Controllers
     [Route("{controller}")]
     public class SupplierController : Controller
     {
+        private readonly IMapper _mapper;
+        private ISupplierService _supplierService;
+
+        public SupplierController(ISupplierService supplierService, IMapper mapper)
+        {
+            this._supplierService = supplierService;
+            this._mapper = mapper;
+        }
+
+
         [HttpGet("AllSuppliers")]
         public IActionResult Index()
         {

@@ -1,4 +1,8 @@
+using BusinessLogicalLayer.Implements;
+using BusinessLogicalLayer.Interfaces;
 using DataAccessLayer;
+using DataAccessLayer.Implements;
+using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +20,12 @@ builder.Services.AddDbContext<ListDbContext>(opt =>
     opt.UseSqlServer("name=ConnectionStrings:ConnectionString");
 });
 
+builder.Services.AddTransient<IUnityOfWork, UnityOfWork>();
+builder.Services.AddTransient<ICompanyDAL, CompanyDAL>();
+builder.Services.AddTransient<ISupplierDAL, SupplierDAL>();
+builder.Services.AddTransient<ISupplierService, SupplierService>();
+builder.Services.AddTransient<ICompanyService, CompanyService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();
