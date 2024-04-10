@@ -8,7 +8,7 @@ using WebApi.Models.SupplierModels;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("/")]
+    [Route("api/Home")]
     public class HomeController : Controller
     {
         private readonly ISupplierService supplierService;

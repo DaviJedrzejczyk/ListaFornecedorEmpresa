@@ -55,6 +55,7 @@ namespace BusinessLogicalLayer.Implements
         {
             try
             {
+                supplier.Company = (await _unityOfWork.CompanyDAL.GetById(supplier.CompanyId)).Item;
                 Response response = ValidateFields(supplier);
 
                 if (response.HasSuccess)
