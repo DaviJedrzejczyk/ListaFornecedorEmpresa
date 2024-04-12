@@ -169,15 +169,14 @@ namespace BusinessLogicalLayer.Implements
         {
             if (!string.IsNullOrWhiteSpace(cpf))
             {
-                if (ValidateDateBirth(age.Value) || BrasilianEstates.PR == state)
+                if (!ValidateDateBirth(age.Value) || BrasilianEstates.PR == state)
                 {
-                    return true;
+                    return false;
                 }
                 else if (state != BrasilianEstates.PR)
                 {
                     return true;
                 }
-                return false;
             }
 
             return true;
