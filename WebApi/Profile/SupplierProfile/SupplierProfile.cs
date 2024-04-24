@@ -11,21 +11,8 @@ namespace WebApi.Profile.SupplierProfile
             CreateMap<Supplier, SupplierInsertViewModel>();
 
             CreateMap<SupplierEditViewModel, Supplier>();
-            //.ForPath(c => c.Company.CNPJ,
-            //    x => x.MapFrom(src => src.Company.CNPJ))
-            //.ForPath(c => c.Company.FantasyName,
-            //    x => x.MapFrom(src => src.Company.FantasyName))
-            //.ForPath(c => c.Company.UF,
-            //    x => x.MapFrom(src => src.Company.UF));
-
-
+           
             CreateMap<Supplier, SupplierEditViewModel>();
-                //.ForPath(c => c.Company.CNPJ,
-                //    x => x.MapFrom(src => src.Company.CNPJ))
-                //.ForPath(c => c.Company.FantasyName,
-                //    x => x.MapFrom(src => src.Company.FantasyName))
-                //.ForPath(c => c.Company.UF,
-                //    x => x.MapFrom(src => src.Company.UF));
 
             CreateMap<SupplierListViewModel, Supplier>()
                 .ForPath(c => c.Company.CNPJ,
